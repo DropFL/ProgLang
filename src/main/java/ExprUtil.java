@@ -1,6 +1,6 @@
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class ExprUtil {
+public final class ExprUtil {
 
     private ExprUtil () {}
 

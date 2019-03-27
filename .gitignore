@@ -1,5 +1,6 @@
-.antlr
-.vscode
-target
+.antlr/
+.vscode/
+target/
+bin/
 antlr4.jar
 **/*.class

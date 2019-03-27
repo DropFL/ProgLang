@@ -7,6 +7,10 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 public class ExprEvalApp {
+
+    private static ParseTreeWalker walker = new ParseTreeWalker();
+    private static ExprEvalListener listener = new ExprEvalListener();
+
     public static void main (String[] args) throws IOException {
         String input;
 
@@ -20,7 +24,7 @@ public class ExprEvalApp {
             input = c.readLine();
         }
 
-        if (input.equals("DropFL")) {
+        if (input.equals("interactive")) {
             Console c = System.console();
             while (!(input = c.readLine(" >> ")).equals("exit"))
                 eval(CharStreams.fromString(input));
@@ -42,15 +46,9 @@ public class ExprEvalApp {
     }
 
     private static void eval (CharStream stream) throws IOException {
-        // Get lexer
         ExprLexer lexer = new ExprLexer(stream);
-        // Get a list of matched tokens
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        // Pass tokens to parser
         ExprParser parser = new ExprParser(tokens);
-        // Walk parse-tree and attach our listener
-        ParseTreeWalker walker = new ParseTreeWalker();
-        ExprEvalListener listener = new ExprEvalListener();
         
         walker.walk(listener, parser.prog());
     }
