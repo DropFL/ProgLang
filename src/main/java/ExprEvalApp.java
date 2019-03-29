@@ -14,7 +14,7 @@ public class ExprEvalApp {
     public static void main (String[] args) throws IOException {
         String input;
 
-        if (args.length > 1) input = args[1];
+        if (args.length > 0) input = args[0];
         else {
             Console c = System.console();
             if (c == null) {
