@@ -1,6 +1,6 @@
 # Programming Language Assignment
 
-This repository is created to update files between linux cluster and my PC more easily, and describing about the structure of this project.
+This repository is created to update files between Linux cluster and my PC more easily, and describing about the structure of this project.
 
 ## Simple Assignable Calculator using [ANTLR4](https://github.com/antlr/antlr4)
 
@@ -56,7 +56,7 @@ This class contains the main function. A flow of this program is following:
 
 This class is a child class of `ExprBaseListener`. It listens to the trail of `ParseTreeWalker` through `ParseTree`, and does some tasks corresponds to current step.
 
-In detail, this class executes shunting-yard algorithm and produces postfixed expression. At the end of each statement, it finally evaluates the formula. If it is an `expr`, the result is printed to the console. Otherwise, (i.e. if it is an `assn`,) the value is assigned to the indicated variable.
+In detail, this class executes shunting-yard algorithm and produces post fixed expression. At the end of each statement, it finally evaluates the formula. If it is an `expr`, the result is printed to the console. Otherwise, (i.e. if it is an `assn`,) the value is assigned to the indicated variable.
 
 ##### 3. `ExprValue`: Value Wrapping Class
 
