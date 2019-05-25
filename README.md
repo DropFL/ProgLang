@@ -18,9 +18,9 @@ This file is a lexer grammar file, so it only tokenizes given string. There are 
 
 * **`PACK_DEF` / `IMPORT_DEF`**
   These modes are package and import statement modes, respectively. Since no whitespaces are allowed in this sentence, there are no skipping tokens in this mode.
-* `STRING`
+* **`STRING`**
   This mode includes a set of tokens inside of string literals. It ignores `WS` token in the `DEFAULT_MODE` and collects any single characters.
-* `ID_TEMPLATE`
+* **`ID_TEMPLATE`**
   It is the mode that indicates an `ID`-based string template. This is the sub-mode of `STRING`; it cannot be directly switched from other mode than `STRING`.
 
   Expression-based string template is parsed on `DEFAULT_MODE`, since separating that mode requires too many extra tokens.
