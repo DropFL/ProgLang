@@ -39,7 +39,7 @@ public class KotlinBinding {
      * <p>
      * Every {@code Binding} object that {@code globalBindings} holding is
      * the head of the linked list. It means, the {@code Binding} object can
-     * be retrieved by name represents the type of the variable in
+     * be retrieved by its name represents the type of the variable in
      * the current context.
      * 
      * @see #bindings

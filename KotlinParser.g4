@@ -16,12 +16,7 @@ import_stmt : IMPORT identifier ALL? sep;
 
 // ==================== loops
 
-loop        : for_loop
-            | while_loop
-            ;
-
-for_loop    : FOR n L_PAREN n ID n IN n expr n R_PAREN n (block | stmt | SEMICOLON);
-while_loop  : WHILE n L_PAREN n expr n R_PAREN n (block | stmt | SEMICOLON);
+loop        : FOR n L_PAREN n ID n IN n expr n R_PAREN n (block | stmt | SEMICOLON);
 
 // ==================== operator groups
 
@@ -65,11 +60,12 @@ prefix      : INCR
             | PLUS
             | MINUS
             | NEGATE
+//          | L_PAREN identifier R_PAREN    out of spec
             ;
 
 postfix     : INCR
             | DECR
-            | DOT n expr_term
+            | DOT n ID
             | arg_list
             | L_BRACKET expr R_BRACKET
             ;
@@ -105,7 +101,7 @@ expr_term   : THIS
             | literal
             | paren_expr
             | if_expr
-            | when_expr
+//          | when_expr                     out of spec
             | jumps
             ;
 
@@ -115,22 +111,10 @@ paren_expr  : L_PAREN n expr n R_PAREN;
 
 if_expr     : IF n paren_expr (n block | n stmt | sep) (n ELSE n (block | stmt | SEMICOLON))?;
 
-when_expr   : WHEN n when_targ? n L_BRACE n when_case (sep when_case)* n R_BRACE;
-when_targ   : L_PAREN n (VAL n ID n type_def? n ASSIGN n)? expr n R_PAREN;
-when_case   : check_op? n expr (n check_op? n expr)* n CASE n (block | stmt)
-            | ELSE n CASE n (block | stmt);
-
 jumps       : CONTINUE
             | BREAK
             | RETURN n expr?
             ;
-
-// ==================== class related
-
-class_decl  : modifier* n (CLASS | INTERFACE) n ID n prim_cstr? n inherit? n class_body;
-class_body  : L_BRACE n root_elem? n R_BRACE;
-prim_cstr   : L_PAREN n (var_decl (n COMMA n var_decl )*)? n R_PAREN;
-inherit     : COLON n identifier n arg_list? (n COMMA n identifier n arg_list?)*;
 
 // ==================== function related
 
@@ -154,13 +138,7 @@ literal     : INT
 
 // ==================== string related
 
-str         : DBLE_Q str_elem* DBLE_Q;
-str_elem    : CHAR+
-            | expr_tmpl
-            | smpl_tmpl
-            ;
-smpl_tmpl   : DOLLAR ID;
-expr_tmpl   : TMPL_ENTRY expr R_BRACE;
+str         : DBLE_Q CHAR* DBLE_Q;
 
 // ==================== variable / value related
 
@@ -178,7 +156,7 @@ stmt        : expr
             ;
 decl        : var_decl
             | func_decl
-            | class_decl
+//          | class_decl                    out of spec
             ;
 
 identifier  : ID (DOT ID)*;
@@ -187,3 +165,34 @@ type        : identifier (n LESS n type n GRTR)? n QUESTION?;
 block       : L_BRACE n (stmt (sep stmt)* sep?)? R_BRACE;
 n           : NL*;
 sep         : (NL | SEMICOLON) n;
+
+
+
+// ==================== GRAVEYARD ====================
+
+/*
+loop        : for_loop
+            | while_loop
+            ;
+
+for_loop    : FOR n L_PAREN n ID n IN n expr n R_PAREN n (block | stmt | SEMICOLON);
+while_loop  : WHILE n L_PAREN n expr n R_PAREN n (block | stmt | SEMICOLON);
+
+when_expr   : WHEN n when_targ? n L_BRACE n when_case (sep when_case)* n R_BRACE;
+when_targ   : L_PAREN n (VAL n ID n type_def? n ASSIGN n)? expr n R_PAREN;
+when_case   : check_op? n expr (n check_op? n expr)* n CASE n (block | stmt)
+            | ELSE n CASE n (block | stmt);
+
+class_decl  : modifier* n (CLASS | INTERFACE) n ID n prim_cstr? n inherit? n class_body;
+class_body  : L_BRACE n root_elem? n R_BRACE;
+prim_cstr   : L_PAREN n (var_decl (n COMMA n var_decl )*)? n R_PAREN;
+inherit     : COLON n identifier n arg_list? (n COMMA n identifier n arg_list?)*;
+
+str         : DBLE_Q str_elem* DBLE_Q;
+str_elem    : CHAR+
+            | expr_tmpl
+            | smpl_tmpl
+            ;
+smpl_tmpl   : DOLLAR ID;
+expr_tmpl   : TMPL_ENTRY expr R_BRACE;
+*/

@@ -10,8 +10,6 @@ MLTI_CMNT   : '/*' .*? '*/' -> channel(HIDDEN); // multi line comment
 
 PACKAGE : 'package '-> pushMode(PACK_DEF)    ;  // package declaration keyword
 IMPORT  : 'import ' -> pushMode(IMPORT_DEF)  ;  // import statement keyword
-CLASS   : 'class'   ;                           // class declaration keyword
-INTERFACE: 'interface';                         // interface declaration keyword
 FUN     : 'fun'     ;                       // function declaration keyword
 VAR     : 'var'     ;                       // variable declaration keyword
 VAL     : 'val'     ;                       // value declaration keyword
@@ -19,8 +17,6 @@ RETURN  : 'return'  ;                       // return statement keyword
 IF      : 'if'      ;                       // if statement keyword
 ELSE    : 'else'    ;                       // else statement keyword
 FOR     : 'for'     ;                       // for loop keyword
-WHILE   : 'while'   ;                       // while loop keyword
-WHEN    : 'when'    ;                       // when expression keyword
 DOWNTO  : 'downTo'  ;                       // downTo range option keyword
 STEP    : 'step'    ;                       // step range option keyword
 NULL    : 'null'    ;                       // null value keyword
@@ -38,13 +34,9 @@ ABSTRACT: 'abstract';                       // abstract keyword
 FINAL   : 'final'   ;                       // final keyword
 OPEN    : 'open'    ;                       // open keyword
 
-// ========================= special operators
-
-DBLE_Q      : '"'   -> pushMode(STRING);        // double quote is a start character of a string
-TMPL_ENTRY  : '${'  ;
-
 // ========================= operators
 
+DBLE_Q      : '"'   ; // -> pushMode(STRING);   // double quote is a start character of a string
 IS          : 'is'  ;
 NOT_IS      : '!is' ;
 IN          : 'in'  ;
@@ -85,10 +77,15 @@ R_PAREN     : ')'   ;
 L_BRACKET   : '['   ;
 R_BRACKET   : ']'   ;
 SNGL_Q      : '\''  ;
-R_BRACE     : '}'   -> popMode;
-L_BRACE     : '{'   -> pushMode(DEFAULT_MODE);
-DOLLAR      : '$'   ;
+R_BRACE     : '}'   ; // -> popMode;
+L_BRACE     : '{'   ; // -> pushMode(DEFAULT_MODE);
 ASSIGN      : '='   ;
+
+// ==================== miscellaneous
+
+ID          : [a-zA-Z][0-9a-zA-Z]*;           // identifier
+NL          : ('\r'? '\n')+;
+SEMICOLON   : ';';
 
 // ==================== primitive values
 
@@ -97,21 +94,15 @@ REAL        : DIGIT* DOT DIGIT+ SUF_FLOAT?      // real number
             ;
 INT         : DIGIT+ SUF_LONG?;                 // integer
 BOOL        : TRUE | FALSE;                     // boolean
-SINGLE_CH   : SNGL_Q (CHAR | DOLLAR) SNGL_Q;    // single character
+SINGLE_CH   : SNGL_Q (CHAR) SNGL_Q;             // single character
 
 // ==================== string related
 
-ID          : [a-zA-Z][0-9a-zA-Z]*;           // identifier
 
 CHAR        : ~('\\' | '\n' | '\r' | '$')
             | '\\' ~'u'
             | '\\u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
             ;
-
-// ==================== miscellaneous
-
-NL          : ('\r'? '\n')+;
-SEMICOLON   : ';';
 
 // ========================= fragments
 
@@ -143,7 +134,20 @@ IMPORT_ALL  : ALL -> type(ALL);
 IMPORT_NL   : NL -> type(NL), popMode;
 IMPORT_SEMI : SEMICOLON -> type(SEMICOLON), popMode;
 
-/* ========================= inside of string ========================= */
+
+
+
+// ==================== GRAVEYARD ====================
+
+/*
+CLASS   : 'class'   ;                       // class declaration keyword
+INTERFACE: 'interface';                     // interface declaration keyword
+WHILE   : 'while'   ;                       // while loop keyword
+WHEN    : 'when'    ;                       // when expression keyword
+
+TMPL_ENTRY  : '${'  ;
+DOLLAR      : '$'   ;
+SINGLE_CH   : SNGL_Q (CHAR | DOLLAR) SNGL_Q;    // single character
 
 mode STRING;
 
@@ -152,8 +156,7 @@ STR_TMPL_ENT: TMPL_ENTRY -> type(TMPL_ENTRY), pushMode(DEFAULT_MODE);
 STR_DOLLAR  : DOLLAR -> type(DOLLAR), pushMode(ID_TEMPLATE);
 STR_CHAR    : CHAR -> type(CHAR);
 
-/* ========================= inside of id-based template ========================= */
-
 mode ID_TEMPLATE;
 
 IDTMPL_ID   : ID -> type(ID), popMode;
+*/

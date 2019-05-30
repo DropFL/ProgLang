@@ -40,18 +40,6 @@ public interface KotlinParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLoop(KotlinParser.LoopContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link KotlinParser#for_loop}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFor_loop(KotlinParser.For_loopContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#while_loop}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhile_loop(KotlinParser.While_loopContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link KotlinParser#assign_op}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -202,53 +190,11 @@ public interface KotlinParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIf_expr(KotlinParser.If_exprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link KotlinParser#when_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhen_expr(KotlinParser.When_exprContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#when_targ}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhen_targ(KotlinParser.When_targContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#when_case}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhen_case(KotlinParser.When_caseContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link KotlinParser#jumps}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitJumps(KotlinParser.JumpsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#class_decl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitClass_decl(KotlinParser.Class_declContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#class_body}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitClass_body(KotlinParser.Class_bodyContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#prim_cstr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrim_cstr(KotlinParser.Prim_cstrContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#inherit}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInherit(KotlinParser.InheritContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link KotlinParser#func_decl}.
 	 * @param ctx the parse tree
@@ -285,24 +231,6 @@ public interface KotlinParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStr(KotlinParser.StrContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#str_elem}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStr_elem(KotlinParser.Str_elemContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#smpl_tmpl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSmpl_tmpl(KotlinParser.Smpl_tmplContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KotlinParser#expr_tmpl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpr_tmpl(KotlinParser.Expr_tmplContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link KotlinParser#assn_rhs}.
 	 * @param ctx the parse tree

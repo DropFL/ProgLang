@@ -99,12 +99,6 @@ public class KotlinVisitor extends KotlinParserBaseVisitor<String> {
         // TODO function declaration
         return "";
     }
-    
-    @Override
-    public String visitClass_decl (KotlinParser.Class_declContext ctx) {
-        // TODO class declaration
-        return "";
-    }
 
     // TODO WIP
 }
